@@ -1,22 +1,40 @@
 // Add a hook.
-function agregar_chatbot_html(  ) {
-echo '<div id="chatbotContainer" class="chatbot-container">
+function agregar_chatbot_html() {
+//
+// Este es el botón del ZORRO que abre el chat.
+// ID: "chat-toggle-btn"
+//
+echo '<button id="chat-toggle-btn"></button>';
+
+//
+// Esta es la burbuja de "¡Hey!" que aparece a los 5 segundos.
+// ID: "chat-ping-bubble"
+//
+echo '<div id="chat-ping-bubble" class="chat-ping-bubble">¡Hey! ¿Necesitas ayuda?</div>';
+
+//
+// Esta es la VENTANA DEL CHAT principal.
+// ID: "chatbot-container"
+//
+echo '<div id="chatbot-container" class="chatbot-container">
     <div class="chatbot-header">
-        <img src="http://practicas.fi.ubiobio.cl/wp-content/uploads/2025/08/awa.png" alt="Kumpi UBB" class="header-logo">
+        <img src="http://practicas.fi.ubiobio.cl/wp-content/uploads/2025/11/kumpi_chat.png" alt="Kumpi UBB" class="header-logo">
         <div class="header-info">
             <span class="header-title">Asistente Kumpi</span>
             <span class="header-status">En línea</span>
         </div>
-        <button id="closeChatBtn" class="close-button">&times;</button>
+        <button class="chat-close-btn close-button">&times;</button>
     </div>
-    <div class="chatbot-body" id="chatbotBody">
-    </div>
+    
+    <div class="chatbot-body" id="chat-messages">
+        </div>
+    
     <div class="chatbot-footer">
-        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." class="user-input" maxlength="250">
-        <button id="sendButton" class="send-button">Enviar</button>
+        <input type="text" id="chat-input" placeholder="Escribe tu pregunta..." class="user-input" maxlength="2000">
+        
+        <button id="chat-send-btn" class="send-button">Enviar</button>
     </div>
-</div>
-<button id="openChatBtn" class="chat-button"></button>';
+</div>'; // <--- ¡AQUÍ ESTABA EL ERROR! Añadí el punto y coma que faltaba.
 
 }
 add_action( 'wp_footer', 'agregar_chatbot_html', 10 );

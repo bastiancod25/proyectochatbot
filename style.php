@@ -1,24 +1,107 @@
 // Agregar CSS del chatbot UBB
 function agregar_chatbot_css_ubb() {
-    echo '<style>
-.chat-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    border-radius: 50px;
-    padding: 15px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+// Usamos la sintaxis Heredoc (<<<CSS ... CSS;) para imprimir el bloque de CSS
+// Esto evita errores de comillas
+echo <<<CSS
+<style>
+
+/* --- Animación de vibración para el botón --- */
+@keyframes vibrate-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(0, 123, 255, 1);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  }
 }
 
+/* --- Estilos del nuevo botón del zorro --- */
+#chat-toggle-btn {
+  
+  /* URL de tu imagen del zorro */
+  background-image: url("http://practicas.fi.ubiobio.cl/wp-content/uploads/2025/11/kumpi_chat.png"); 
+  
+  background-size: cover;
+  background-position: center;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%; /* Redondo */
+  border: none;
+  padding: 0;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 998;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  transition: transform 0.2s ease;
+  
+  /* Aplicar la animación */
+  animation: vibrate-pulse 2.5s infinite ease-in-out;
+}
+
+#chat-toggle-btn:hover {
+  transform: scale(1.15);
+  animation-play-state: paused;
+}
+
+/* --- ESTILO PARA LA BURBUJA DE "HEY!" --- */
+
+.chat-ping-bubble {
+  /* Oculto por defecto */
+  display: block;
+  opacity: 0;
+  pointer-events: none; /* No se puede hacer clic en él */
+
+  /* Posición */
+  position: fixed;
+  bottom: 100px; /* Justo encima del botón del zorro (70px + 20px + 10px) */
+  right: 20px;
+  z-index: 997; /* Debajo del botón por si acaso */
+  
+  /* Estilo de burbuja */
+  background-color: white;
+  color: #333;
+  padding: 10px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-size: 15px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Transición */
+  transform: translateY(10px);
+  transition: all 0.3s ease-out;
+}
+
+/* Triángulo/flecha de la burbuja */
+.chat-ping-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -8px; /* Apunta hacia abajo */
+  right: 25px; /* Alineado con el botón */
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid white; /* Triángulo hecho con bordes */
+}
+
+/* Clase que le pondrá el JavaScript para mostrarla */
+.chat-ping-bubble.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- ESTILOS DE LA VENTANA DEL CHAT --- */
 .chatbot-container {
     position: fixed;
-    bottom: 80px;
+    bottom: 100px; /* Ajustado para que no choque con el nuevo botón */
     right: 20px;
     width: 350px;
     height: 500px;
@@ -138,39 +221,27 @@ function agregar_chatbot_css_ubb() {
     cursor: pointer;
     font-size: 1em;
 }
-/* Estilo para el botón del chat */
-#botonChat {
-    width: 50px; /* Ajusta el ancho según sea necesario */
-    height: 50px; /* Ajusta la altura según sea necesario */
-    position: fixed; /* Mantiene el botón en una posición fija */
-    bottom: 20px; /* Distancia desde la parte inferior */
-    right: 20px; /* Distancia desde la derecha */
-    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
-}
-/* Estilo para el contenedor del chat */
-#contenedorChat {
-    position: fixed; /* Mantiene el contenedor en una posición fija */
-    bottom: 80px; /* Ajusta la distancia desde la parte inferior */
-    right: 20px; /* Ajusta la distancia desde la derecha */
-    width: 300px; /* Ajusta el ancho según sea necesario */
-    max-height: 400px; /* Limita la altura máxima */
-    overflow-y: auto; /* Permite el desplazamiento si el contenido es demasiado grande */
-    z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
-}
 
-
+/* --- VISTA EN MÓVILES --- */
 @media (max-width: 600px) {
-    #botonChat {
-        width: 40px; /* Tamaño más pequeño en pantallas pequeñas */
-        height: 40px;
+    #chat-toggle-btn {
+        width: 60px; /* Botón un poco más pequeño en móviles */
+        height: 60px;
+    }
+    
+    .chat-ping-bubble {
+        bottom: 90px; /* Ajustar posición en móviles */
     }
 
-    #contenedorChat {
-        width: 90%; /* Ancho más amplio en pantallas pequeñas */
-        right: 5%; /* Ajusta la posición */
+    .chatbot-container {
+        width: 100%; /* Ancho completo en móviles */
+        height: 100%; /* Alto completo en móviles */
+        right: 0;
+        bottom: 0;
+        border-radius: 0;
     }
 }
-
-</style>';
+</style>
+CSS;
 }
 add_action('wp_head', 'agregar_chatbot_css_ubb');
