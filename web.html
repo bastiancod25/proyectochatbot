@@ -1,0 +1,22 @@
+// Add a hook.
+function agregar_chatbot_html(  ) {
+echo '<div id="chatbotContainer" class="chatbot-container">
+    <div class="chatbot-header">
+        <img src="http://practicas.fi.ubiobio.cl/wp-content/uploads/2025/08/awa.png" alt="Kumpi UBB" class="header-logo">
+        <div class="header-info">
+            <span class="header-title">Asistente Kumpi</span>
+            <span class="header-status">En línea</span>
+        </div>
+        <button id="closeChatBtn" class="close-button">&times;</button>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+    </div>
+    <div class="chatbot-footer">
+        <input type="text" id="userInput" placeholder="Escribe tu pregunta..." class="user-input" maxlength="250">
+        <button id="sendButton" class="send-button">Enviar</button>
+    </div>
+</div>
+<button id="openChatBtn" class="chat-button"></button>';
+
+}
+add_action( 'wp_footer', 'agregar_chatbot_html', 10 );
