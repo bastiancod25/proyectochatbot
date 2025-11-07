@@ -176,24 +176,33 @@ echo <<<CSS
     gap: 10px;
 }
 
+/* ================================================== */
+/* --- ¡CAMBIO AQUÍ! (Más padding para el mensaje) --- */
+/* ================================================== */
 .message {
     max-width: 80%;
-    padding: 10px 12px;
-    border-radius: 8px;
+    padding: 12px 18px; /* Aumentado para más espacio */
     word-wrap: break-word;
+    line-height: 1.4; /* Más espacio entre líneas */
 }
 
 .user-message {
     align-self: flex-end;
     background-color: #dcf8c6;
+	padding: 12px 8px; /* Aumentado para más espacio */
     color: #333;
+    /* Más ovalado y con "cola" a la derecha */
+    border-radius: 18px 18px 5px 18px;
 }
 
 .bot-message {
     align-self: flex-start;
+	padding: 12px 8px; /* Aumentado para más espacio */
     background-color: #ffffff;
     color: #333;
     border: 1px solid #e0e0e0;
+    /* Más ovalado y con "cola" a la izquierda */
+    border-radius: 18px 18px 18px 5px;
 }
 
 .chatbot-footer {
